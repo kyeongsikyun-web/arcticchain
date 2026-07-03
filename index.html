@@ -1,0 +1,475 @@
+<!-- 일본 해상운송 화물 대금결제(에스크로) 서비스 사전등록 랜딩페이지 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArcticChain — 해상운송 대금결제 자동화</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F8F9;
+    --surface:#FFFFFF;
+    --surface-2:#EEF3F4;
+    --ink:#0E2A38;
+    --ice:#0F766E;
+    --ice-dim:#4B8781;
+    --amber:#C9822B;
+    --amber-dim:#A66B1F;
+    --text:#10222B;
+    --text-dim:#5C7480;
+    --line:#0E2A3812;
+    --line-soft:rgba(14,42,56,0.10);
+    --radius:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:500;letter-spacing:-0.01em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+  @media (max-width:640px){ section{padding:64px 0;} }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(245,248,249,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;}
+  .logo{font-size:18px;font-weight:700;letter-spacing:-0.02em;display:flex;align-items:center;gap:8px;}
+  .logo-mark{display:inline-flex;flex:none;}
+  .nav-cta{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;
+    padding:9px 18px;border:1px solid var(--ice-dim);border-radius:6px;
+    transition:border-color .15s, background .15s;
+  }
+  .nav-cta:hover{border-color:var(--ice);background:var(--line-soft);}
+
+  /* ---------- Hero ---------- */
+  .hero{padding-top:88px;padding-bottom:64px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ice-dim);
+    letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:'';width:16px;height:1px;background:var(--ice-dim);}
+  .hero h1{
+    font-size:clamp(32px,5vw,54px);line-height:1.12;max-width:760px;color:var(--ink);
+  }
+  .hero h1 em{font-style:normal;color:var(--ice);}
+  .hero p.sub{
+    margin-top:24px;max-width:560px;font-size:17px;color:var(--text-dim);
+  }
+  .hero-actions{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--amber);color:#241605;font-weight:600;
+    padding:14px 26px;border-radius:6px;border:none;font-size:15px;
+    cursor:pointer;transition:background .15s, transform .15s;
+    font-family:'Inter',sans-serif;
+  }
+  .btn-primary:hover{background:#f0b054;}
+  .btn-primary:focus-visible{outline:2px solid var(--ice);outline-offset:3px;}
+  .btn-secondary{
+    padding:14px 22px;border-radius:6px;border:1px solid var(--line-soft);
+    color:var(--text-dim);font-size:15px;background:transparent;
+    transition:border-color .15s, color .15s;
+  }
+  .btn-secondary:hover{border-color:var(--ice-dim);color:var(--text);}
+
+  /* ---------- Manifest ticker (signature element) ---------- */
+  .ticker-frame{
+    margin-top:56px;border:1px solid var(--line-soft);border-radius:var(--radius);
+    background:var(--surface);overflow:hidden;
+  }
+  .ticker-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 18px;border-bottom:1px solid var(--line-soft);
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-dim);
+  }
+  .ticker-head .dot{width:6px;height:6px;border-radius:50%;background:#5FD98A;display:inline-block;margin-right:6px;
+    animation:blink 2s ease-in-out infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+  /* ---------- Port approach scene (실사 사진) ---------- */
+  .scene-frame{
+    margin-top:40px;border:1px solid var(--line-soft);border-radius:var(--radius);
+    background:var(--surface);overflow:hidden;
+  }
+  .scene-photo{display:block;width:100%;height:340px;object-fit:cover;}
+
+  /* ---------- Logo exchange (로고 교환) ---------- */
+  .exchange-frame{
+    margin-top:16px;border:1px solid var(--line-soft);border-radius:var(--radius);
+    background:var(--surface);overflow:hidden;
+  }
+  .exchange-body{
+    display:flex;align-items:center;justify-content:center;gap:22px;
+    padding:28px 20px;
+  }
+  .exchange-mark{width:40px;height:40px;flex:none;}
+  .exchange-arrows{display:flex;gap:6px;align-items:center;}
+  .exchange-arrows svg{width:18px;height:18px;}
+  .exchange-arrows .chevron{opacity:.25;animation:chevronPulse 1.8s ease-in-out infinite;}
+  .exchange-arrows .chevron:nth-child(1){animation-delay:0s;}
+  .exchange-arrows .chevron:nth-child(2){animation-delay:.2s;}
+  .exchange-arrows .chevron:nth-child(3){animation-delay:.4s;}
+  @keyframes chevronPulse{
+    0%,60%,100%{opacity:.2;}
+    30%{opacity:1;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .exchange-arrows .chevron{animation:none;opacity:.7;}
+  }
+  .exchange-caption{
+    text-align:center;padding:0 20px 22px;font-family:'IBM Plex Mono',monospace;
+    font-size:11px;color:var(--text-dim);
+  }
+  .ticker-body{height:168px;overflow:hidden;position:relative;}
+  .ticker-track{
+    display:flex;flex-direction:column;
+    animation:scrollUp 14s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} .ticker-head .dot{animation:none;} }
+  @keyframes scrollUp{
+    0%{transform:translateY(0);}
+    100%{transform:translateY(-50%);}
+  }
+  .ticker-row{
+    display:grid;grid-template-columns:96px 1fr 120px 90px;gap:14px;
+    padding:9px 18px;font-family:'IBM Plex Mono',monospace;font-size:12px;
+    color:var(--text-dim);border-bottom:1px solid rgba(14,42,56,0.06);
+    align-items:center;
+  }
+  .ticker-row .id{color:var(--ice-dim);}
+  .ticker-row .status{
+    display:inline-flex;padding:2px 8px;border-radius:4px;font-size:11px;width:fit-content;
+  }
+  .st-created{background:rgba(92,116,128,0.12);color:var(--text-dim);}
+  .st-funded{background:rgba(15,118,110,0.12);color:var(--ice);}
+  .st-transit{background:rgba(201,130,43,0.14);color:var(--amber-dim);}
+  .st-done{background:rgba(21,140,90,0.14);color:#158C5A;}
+  .ticker-row .amt{text-align:right;color:var(--text);}
+
+  /* ---------- Section shared ---------- */
+  .section-head{max-width:640px;margin-bottom:48px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(24px,3.4vw,34px);color:var(--ink);}
+  .section-head p{margin-top:14px;color:var(--text-dim);font-size:16px;max-width:520px;}
+
+  /* ---------- Problem ---------- */
+  .problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);
+    border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden;}
+  @media (max-width:760px){ .problem-grid{grid-template-columns:1fr;} }
+  .problem-card{background:var(--surface);padding:32px 28px;}
+  .problem-card .num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber-dim);}
+  .problem-card h3{font-size:18px;margin-top:14px;color:var(--ink);font-weight:500;}
+  .problem-card p{margin-top:10px;font-size:14px;color:var(--text-dim);}
+
+  /* ---------- How it works ---------- */
+  .flow{display:flex;flex-direction:column;border:1px solid var(--line-soft);border-radius:var(--radius);overflow:hidden;}
+  .flow-step{
+    display:grid;grid-template-columns:64px 1fr auto;gap:20px;align-items:center;
+    padding:26px 28px;border-bottom:1px solid var(--line-soft);background:var(--surface);
+  }
+  .flow-step:last-child{border-bottom:none;}
+  .flow-step .stage-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:#fff;
+    background:var(--ice);padding:4px 0;border-radius:4px;text-align:center;font-weight:500;
+  }
+  .flow-step h3{font-size:16px;color:var(--ink);font-weight:500;}
+  .flow-step p{font-size:14px;color:var(--text-dim);margin-top:4px;}
+  .flow-step .actor{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-dim);
+    border:1px solid var(--line-soft);padding:6px 12px;border-radius:100px;white-space:nowrap;
+  }
+  @media (max-width:640px){
+    .flow-step{grid-template-columns:1fr;gap:10px;}
+    .flow-step .stage-tag{width:fit-content;padding:4px 10px;}
+  }
+
+  /* ---------- Compliance ---------- */
+  .compliance{
+    border:1px solid rgba(232,163,61,0.35);background:rgba(232,163,61,0.06);
+    border-radius:var(--radius);padding:32px 32px;
+  }
+  .compliance h3{color:var(--amber);font-size:16px;font-weight:500;display:flex;align-items:center;gap:10px;}
+  .compliance h3::before{content:'';width:8px;height:8px;background:var(--amber);border-radius:2px;flex:none;}
+  .compliance ul{margin-top:16px;padding-left:22px;color:var(--text-dim);font-size:14px;}
+  .compliance li{margin-bottom:8px;}
+  .compliance li strong{color:var(--text);font-weight:500;}
+
+  /* ---------- Register form ---------- */
+  .register{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--radius);
+    padding:44px;display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+  @media (max-width:760px){ .register{grid-template-columns:1fr;padding:28px;} }
+  .register-intro h2{font-size:26px;color:var(--ink);}
+  .register-intro p{margin-top:14px;color:var(--text-dim);font-size:15px;}
+  .register-intro .stat{margin-top:28px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ice-dim);}
+  form{display:flex;flex-direction:column;gap:16px;}
+  .field label{display:block;font-size:13px;color:var(--text-dim);margin-bottom:6px;font-family:'IBM Plex Mono',monospace;}
+  .field input, .field select{
+    width:100%;background:var(--surface-2);border:1px solid var(--line-soft);border-radius:6px;
+    padding:12px 14px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;
+  }
+  .field input:focus-visible, .field select:focus-visible{outline:2px solid var(--ice);outline-offset:1px;border-color:var(--ice);}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:420px){ .field-row{grid-template-columns:1fr;} }
+  .consent{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--text-dim);margin-top:4px;}
+  .consent input{margin-top:3px;}
+  .submit-status{font-size:13px;color:var(--ice);display:none;font-family:'IBM Plex Mono',monospace;}
+
+  footer{border-top:1px solid var(--line-soft);padding:40px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  footer p{font-size:13px;color:var(--text-dim);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">
+      <svg class="logo-mark" width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="4" y="10" width="16" height="16" rx="6" transform="rotate(-20 12 18)" fill="var(--ink)"/>
+        <rect x="12" y="6" width="16" height="16" rx="6" transform="rotate(-20 20 14)" fill="none" stroke="var(--ice)" stroke-width="2.5"/>
+      </svg>
+      ArcticChain
+    </div>
+    <a href="#register" class="nav-cta">사전등록</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">해상운송 대금결제 인프라 · 사전등록 단계</div>
+    <h1>배송완료가 확인되는 순간,<br><em>대금은 이미 정산되어 있습니다.</em></h1>
+    <p class="sub">부산·요코하마 항로를 시작으로, 화물 운송 대금결제를 온체인 에스크로로 자동화합니다. 서류 지연도, 별도 승인 절차도 없이 배송완료 시점에 정산이 완료됩니다.</p>
+    <div class="hero-actions">
+      <a href="#register"><button class="btn-primary">사전등록 하기</button></a>
+      <a href="#how"><button class="btn-secondary">작동 방식 보기</button></a>
+    </div>
+
+    <div class="scene-frame">
+      <div class="ticker-head">
+        <span><span class="dot"></span>PORT APPROACH</span>
+        <span>BUSAN PORT · BERTH 04</span>
+      </div>
+      <img class="scene-photo"
+        src="https://images.unsplash.com/photo-1753184749698-f97b45431a23?fm=jpg&q=80&w=1600&auto=format&fit=crop"
+        alt="항구에서 컨테이너를 하역 중인 대형 컨테이너선"
+        loading="lazy">
+    </div>
+
+    <div class="exchange-frame">
+      <div class="ticker-head">
+        <span><span class="dot"></span>LOGO EXCHANGE</span>
+        <span>AUTOMATED SETTLEMENT</span>
+      </div>
+      <div class="exchange-body">
+        <svg class="exchange-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="4" y="10" width="16" height="16" rx="6" transform="rotate(-20 12 18)" fill="var(--ink)"/>
+          <rect x="12" y="6" width="16" height="16" rx="6" transform="rotate(-20 20 14)" fill="none" stroke="var(--ice)" stroke-width="2.5"/>
+        </svg>
+        <div class="exchange-arrows" aria-hidden="true">
+          <svg class="chevron" viewBox="0 0 24 24"><path d="M8 5l7 7-7 7" stroke="var(--amber)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="chevron" viewBox="0 0 24 24"><path d="M8 5l7 7-7 7" stroke="var(--amber)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="chevron" viewBox="0 0 24 24"><path d="M8 5l7 7-7 7" stroke="var(--amber)" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <svg class="exchange-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="4" y="10" width="16" height="16" rx="6" transform="rotate(-20 12 18)" fill="var(--ink)"/>
+          <rect x="12" y="6" width="16" height="16" rx="6" transform="rotate(-20 20 14)" fill="none" stroke="var(--ice)" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <p class="exchange-caption">화주 ⇄ 운송사 · 배송완료 확인 시 자동 정산</p>
+    </div>
+
+    <div class="ticker-frame">
+      <div class="ticker-head">
+        <span><span class="dot"></span>실시간 정산 원장 (예시 데이터)</span>
+        <span>BUSAN ⇄ YOKOHAMA</span>
+      </div>
+      <div class="ticker-body">
+        <div class="ticker-track" id="tickerTrack"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">현재 방식의 문제</div>
+      <h2>대금은 화물보다 느리게 움직입니다</h2>
+      <p>선하증권과 송금 확인서가 오가는 동안, 실제 화물은 이미 항구에 도착해 있는 경우가 많습니다.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="num mono">01</div>
+        <h3>정산 지연</h3>
+        <p>배송완료 후에도 서류 확인과 은행 절차로 대금 수령까지 수일이 걸립니다.</p>
+      </div>
+      <div class="problem-card">
+        <div class="num mono">02</div>
+        <h3>신뢰 비용</h3>
+        <p>선급금 없이는 운송사가 움직이지 않고, 선지급은 화주에게 리스크로 남습니다.</p>
+      </div>
+      <div class="problem-card">
+        <div class="num mono">03</div>
+        <h3>수기 대사</h3>
+        <p>배송 기록과 결제 기록이 분리되어 있어, 회계 담당자가 매번 수기로 대조합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">작동 방식</div>
+      <h2>네 단계로 끝나는 정산</h2>
+      <p>화주가 대금을 예치하면, 배송완료가 기록되는 순간 컨트랙트가 자동으로 지급합니다. ETH, USDC, USDT를 지원합니다.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step">
+        <span class="stage-tag mono">01</span>
+        <div><h3>에스크로 생성</h3><p>화주가 운송사, 결제 수단, 금액을 지정해 거래 조건을 기록합니다.</p></div>
+        <span class="actor">화주</span>
+      </div>
+      <div class="flow-step">
+        <span class="stage-tag mono">02</span>
+        <div><h3>대금 예치</h3><p>화주가 실제 대금을 컨트랙트에 예치합니다. 이 시점부터 자금이 보호됩니다.</p></div>
+        <span class="actor">화주</span>
+      </div>
+      <div class="flow-step">
+        <span class="stage-tag mono">03</span>
+        <div><h3>운송 기록</h3><p>실시간 선박 위치 데이터를 근거로 운송 시작과 배송완료가 온체인에 기록됩니다.</p></div>
+        <span class="actor">운항 데이터 연동</span>
+      </div>
+      <div class="flow-step">
+        <span class="stage-tag mono">04</span>
+        <div><h3>자동 정산</h3><p>배송완료가 확인되는 즉시, 별도 승인 없이 운송사에게 대금이 지급됩니다.</p></div>
+        <span class="actor">자동 실행</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compliance">
+  <div class="wrap">
+    <div class="compliance">
+      <h3>서비스 범위 및 법적 고지</h3>
+      <ul>
+        <li><strong>대금결제만 다룹니다.</strong> 본 서비스는 화물 운송 대금의 예치와 자동 정산만을 처리하며, 선박 소유권 이전(등기)을 대체하지 않습니다.</li>
+        <li><strong>법률 검토가 진행 중입니다.</strong> 일본 자금결제법(資金決済法) 적용 대상 여부를 포함한 규제 검토를 진행하고 있으며, 검토 완료 전까지는 정식 서비스가 제공되지 않습니다.</li>
+        <li><strong>본인확인은 거래 단위로 진행됩니다.</strong> 정식 오픈 후 실제 거래 시 회사·담당자 확인 절차가 적용됩니다.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="register">
+  <div class="wrap">
+    <div class="register">
+      <div class="register-intro">
+        <h2>사전등록</h2>
+        <p>정식 서비스 오픈 시 우선 안내드립니다. 지금은 정보 수집 단계이며, 실제 거래나 결제는 진행되지 않습니다.</p>
+        <div class="stat mono">현재 상태 · 규제 검토 중</div>
+      </div>
+      <form id="preregForm">
+        <div class="field">
+          <label for="company">회사명</label>
+          <input id="company" name="company" type="text" required autocomplete="organization">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="name">담당자명</label>
+            <input id="name" name="name" type="text" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="role">역할</label>
+            <select id="role" name="role" required>
+              <option value="" disabled selected>선택</option>
+              <option value="shipper">화주</option>
+              <option value="carrier">운송사</option>
+              <option value="broker">화물 주선사</option>
+              <option value="other">기타</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">이메일</label>
+          <input id="email" name="email" type="email" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="route">관심 항로 (선택)</label>
+          <input id="route" name="route" type="text" placeholder="예: 부산-요코하마">
+        </div>
+        <label class="consent">
+          <input type="checkbox" required>
+          <span>정식 서비스 안내 목적의 연락에 동의합니다. 위 정보는 사전등록 목적 외에는 사용되지 않습니다.</span>
+        </label>
+        <button type="submit" class="btn-primary">사전등록 제출</button>
+        <p class="submit-status" id="submitStatus">사전등록이 접수되었습니다. 정식 오픈 시 입력하신 이메일로 안내드립니다.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo">
+      <svg class="logo-mark" width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="4" y="10" width="16" height="16" rx="6" transform="rotate(-20 12 18)" fill="var(--ink)"/>
+        <rect x="12" y="6" width="16" height="16" rx="6" transform="rotate(-20 20 14)" fill="none" stroke="var(--ice)" stroke-width="2.5"/>
+      </svg>
+      ArcticChain
+    </div>
+    <p>© 2026 ArcticChain · 본 페이지는 사전등록 단계이며 실제 결제 기능을 포함하지 않습니다.</p>
+  </div>
+</footer>
+
+<script>
+  // 매니페스트 티커: 실제 컨트랙트 상태값(Created/Funded/InTransit/Completed)을 그대로 반영한 예시 데이터
+  const rows = [
+    { id: '#ARC-0148', route: 'BUSAN → YOKOHAMA', status: 'created', label: 'Created', amt: '18,400 USDC' },
+    { id: '#ARC-0147', route: 'INCHEON → OSAKA', status: 'funded', label: 'Funded', amt: '2.4 ETH' },
+    { id: '#ARC-0146', route: 'BUSAN → KOBE', status: 'transit', label: 'InTransit', amt: '9,200 USDT' },
+    { id: '#ARC-0145', route: 'YOKOHAMA → BUSAN', status: 'done', label: 'Completed', amt: '31,000 USDC' },
+    { id: '#ARC-0144', route: 'BUSAN → NAGOYA', status: 'done', label: 'Completed', amt: '5.1 ETH' },
+    { id: '#ARC-0143', route: 'OSAKA → BUSAN', status: 'transit', label: 'InTransit', amt: '14,700 USDT' },
+  ];
+  const statusClass = { created:'st-created', funded:'st-funded', transit:'st-transit', done:'st-done' };
+  const track = document.getElementById('tickerTrack');
+  function renderRows(list){
+    return list.map(r => `
+      <div class="ticker-row">
+        <span class="id">${r.id}</span>
+        <span>${r.route}</span>
+        <span class="status ${statusClass[r.status]}">${r.label}</span>
+        <span class="amt">${r.amt}</span>
+      </div>`).join('');
+  }
+  // 끊김 없이 순환하도록 두 번 렌더링 후 -50% 트랜스폼으로 루프
+  track.innerHTML = renderRows(rows) + renderRows(rows);
+
+  // 사전등록 폼: 실제 전송 없이 접수 확인만 표시 (백엔드 연동 전 단계)
+  document.getElementById('preregForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('submitStatus').style.display = 'block';
+    this.querySelector('button[type="submit"]').textContent = '접수 완료';
+    this.querySelector('button[type="submit"]').disabled = true;
+  });
+</script>
+
+</body>
+</html>
